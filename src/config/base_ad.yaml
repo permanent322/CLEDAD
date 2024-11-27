@@ -1,0 +1,49 @@
+#type: args
+
+#    PSM : feature size 25
+#    MSL : feature size 55
+#    SMAP : feature size 25
+#    SMD : feature size 38
+#    SWAT : feature size 45
+
+train:
+  epochs: 30  ## Pre-raining epochs using IIF masking
+  batch_size: 32
+  lr: 1.0e-3   
+
+test:
+  batch_size: 16
+
+data:
+  seq_len: 100  ## Sequence length
+  num_feat: 25  ## Number of features in the MTS
+  window: 100   ## Window size for the sliding window
+  stride: 100     ## Stride for the sliding window
+
+diffusion:
+  layers: 4     ##  Number of residual layers in the denoising block
+  channels: 64  ##  Number of channels for projections in the denoising block (residual channels)
+  diffusion_embedding_dim: 128  ## Diffusion step embedding dimension
+  beta_start: 0.0001   ## minimum noise level in the forward pass
+  beta_end: 0.5        ## maximum noise level in the forward pass
+  num_steps: 50        ## Total number of diffusion steps
+  schedule: "quad"     ## Type of noise scheduler
+
+model:
+  timeemb: 128         ## Time embedding dimension
+  featureemb: 16       ## Feature embedding dimension
+  mix_masking_strategy: "patch_mask"  ## Mix masking strategy
+  time_strategy: "hawkes"          ## Time embedding type
+  
+embedding:
+  timeemb: 128
+  featureemb: 16
+  num_feat: 25         ## Total number of features in the MTS (K)
+  num_timestamps: 100   ## Total number of timestamps in the MTS (L)
+  classes: 2
+  channels: 16          ## Number of embedding dimension in both temporal and spatial encoders
+  nheads: 8             ## Number of heads in the temporal and spatial encoders
+  
+finetuning:
+  epochs: 10            ## Number of finetuning epochs for the downstream task
+  
