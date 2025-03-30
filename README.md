@@ -6,7 +6,7 @@ This is a refactored version of the resulting code of the paper for ease of use.
 
 ### Results
 
-![image-20250330182230788](./results/result.png)
+![image-20250330182230788](./result.png)
 
 ### Installation
 
